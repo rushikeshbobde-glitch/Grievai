@@ -29,7 +29,7 @@ def get_password_hash(password: str) -> str:
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
     """Creates a signed JWT access token."""
-    to_encode = data.copy()
+    to_encode = {k: str(v) if not isinstance(v, (int, float, bool, type(None))) else v for k, v in data.items()}
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
     else:

@@ -41,12 +41,12 @@ def seed_initial_data_if_empty():
             pw_citizen = get_password_hash("Citizen@123")
 
             users = [
-                User(id="u1111111-1111-1111-1111-111111111111", name="Chief Admin Officer", email="admin@grievai.gov", password_hash=pw_admin, role="admin", phone="+1-800-555-ADMIN"),
-                User(id="u2222222-2222-2222-2222-222222222222", name="Robert Jenkins (Water Officer)", email="officer.water@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0201"),
-                User(id="u3333333-3333-3333-3333-333333333333", name="Sarah Lin (Roads Officer)", email="officer.roads@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0202"),
-                User(id="u4444444-4444-4444-4444-444444444444", name="David Kim (Electricity Officer)", email="officer.electricity@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0203"),
-                User(id="u5555555-5555-5555-5555-555555555555", name="Elena Gomez (Sanitation Officer)", email="officer.sanitation@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0204"),
-                User(id="u6666666-6666-6666-6666-666666666666", name="John Doe (Citizen)", email="citizen@grievai.gov", password_hash=pw_citizen, role="citizen", phone="+1-800-555-CITIZ"),
+                User(id="a1111111-1111-1111-1111-111111111111", name="Chief Admin Officer", email="admin@grievai.gov", password_hash=pw_admin, role="admin", phone="+1-800-555-ADMIN"),
+                User(id="a2222222-2222-2222-2222-222222222222", name="Robert Jenkins (Water Officer)", email="officer.water@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0201"),
+                User(id="a3333333-3333-3333-3333-333333333333", name="Sarah Lin (Roads Officer)", email="officer.roads@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0202"),
+                User(id="a4444444-4444-4444-4444-444444444444", name="David Kim (Electricity Officer)", email="officer.electricity@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0203"),
+                User(id="a5555555-5555-5555-5555-555555555555", name="Elena Gomez (Sanitation Officer)", email="officer.sanitation@grievai.gov", password_hash=pw_officer, role="officer", phone="+1-800-555-0204"),
+                User(id="a6666666-6666-6666-6666-666666666666", name="John Doe (Citizen)", email="citizen@grievai.gov", password_hash=pw_citizen, role="citizen", phone="+1-800-555-CITIZ"),
             ]
             for u in users:
                 db.add(u)
@@ -54,10 +54,10 @@ def seed_initial_data_if_empty():
 
             # 3. Officers
             officers = [
-                Officer(id="o1111111-1111-1111-1111-111111111111", user_id="u2222222-2222-2222-2222-222222222222", department_id="d1111111-1111-1111-1111-111111111111", badge_number="WTR-409", designation="Senior Hydraulic Engineer", is_available=True),
-                Officer(id="o2222222-2222-2222-2222-222222222222", user_id="u3333333-3333-3333-3333-333333333333", department_id="d2222222-2222-2222-2222-222222222222", badge_number="PWD-812", designation="Public Works Inspector", is_available=True),
-                Officer(id="o3333333-3333-3333-3333-333333333333", user_id="u4444444-4444-4444-4444-444444444444", department_id="d3333333-3333-3333-3333-333333333333", badge_number="ELE-305", designation="Grid Maintenance Supervisor", is_available=True),
-                Officer(id="o4444444-4444-4444-4444-444444444444", user_id="u5555555-5555-5555-5555-555555555555", department_id="d4444444-4444-4444-4444-444444444444", badge_number="SNT-650", designation="Sanitation Zone Lead", is_available=True),
+                Officer(id="b1111111-1111-1111-1111-111111111111", user_id="a2222222-2222-2222-2222-222222222222", department_id="d1111111-1111-1111-1111-111111111111", badge_number="WTR-409", designation="Senior Hydraulic Engineer", is_available=True),
+                Officer(id="b2222222-2222-2222-2222-222222222222", user_id="a3333333-3333-3333-3333-333333333333", department_id="d2222222-2222-2222-2222-222222222222", badge_number="PWD-812", designation="Public Works Inspector", is_available=True),
+                Officer(id="b3333333-3333-3333-3333-333333333333", user_id="a4444444-4444-4444-4444-444444444444", department_id="d3333333-3333-3333-3333-333333333333", badge_number="ELE-305", designation="Grid Maintenance Supervisor", is_available=True),
+                Officer(id="b4444444-4444-4444-4444-444444444444", user_id="a5555555-5555-5555-5555-555555555555", department_id="d4444444-4444-4444-4444-444444444444", badge_number="SNT-650", designation="Sanitation Zone Lead", is_available=True),
             ]
             for o in officers:
                 db.add(o)
@@ -67,8 +67,8 @@ def seed_initial_data_if_empty():
             now = datetime.now(timezone.utc)
             sample_grievances = [
                 Grievance(
-                    id="g1111111-1111-1111-1111-111111111111",
-                    citizen_id="u6666666-6666-6666-6666-666666666666",
+                    id="c1111111-1111-1111-1111-111111111111",
+                    citizen_id="a6666666-6666-6666-6666-666666666666",
                     title="Main water supply pipeline leaking heavily near civic center",
                     description="A main underground water pipe has burst and high pressure water is flooding the street for over 18 hours. Traffic is slowed and water is wasted.",
                     category="Water Supply",
@@ -92,8 +92,8 @@ def seed_initial_data_if_empty():
                     created_at=now - timedelta(hours=2)
                 ),
                 Grievance(
-                    id="g2222222-2222-2222-2222-222222222222",
-                    citizen_id="u6666666-6666-6666-6666-666666666666",
+                    id="c2222222-2222-2222-2222-222222222222",
+                    citizen_id="a6666666-6666-6666-6666-666666666666",
                     title="Dangerous deep pothole causing two-wheeler accidents",
                     description="Deep crater-like pothole right after the curve on Grand Trunk Road. Two motorcyclists skidded yesterday evening. Needs urgent asphalt patching.",
                     category="Roads/Potholes",
@@ -105,7 +105,7 @@ def seed_initial_data_if_empty():
                     sentiment_score=-0.78,
                     department_id="d2222222-2222-2222-2222-222222222222",
                     ai_department_id="d2222222-2222-2222-2222-222222222222",
-                    assigned_officer_id="o2222222-2222-2222-2222-222222222222",
+                    assigned_officer_id="b2222222-2222-2222-2222-222222222222",
                     ai_summary="Dangerous deep pothole causing two-wheeler accidents on Grand Trunk Road.",
                     ai_recommendation="Dispatch road maintenance squad with cold-mix asphalt, install safety barricades around hazard, and resurface damaged section.",
                     ai_confidence=0.92,
@@ -118,8 +118,8 @@ def seed_initial_data_if_empty():
                     created_at=now - timedelta(days=1)
                 ),
                 Grievance(
-                    id="g3333333-3333-3333-3333-333333333333",
-                    citizen_id="u6666666-6666-6666-6666-666666666666",
+                    id="c3333333-3333-3333-3333-333333333333",
+                    citizen_id="a6666666-6666-6666-6666-666666666666",
                     title="Streetlights non-functional on 5th Cross Road for 2 weeks",
                     description="All five sodium street lamps on 5th cross are out. The street is pitch dark and unsafe for pedestrians and women walking back from the station at night.",
                     category="Electricity/Street Lights",
@@ -131,7 +131,7 @@ def seed_initial_data_if_empty():
                     sentiment_score=-0.45,
                     department_id="d3333333-3333-3333-3333-333333333333",
                     ai_department_id="d3333333-3333-3333-3333-333333333333",
-                    assigned_officer_id="o3333333-3333-3333-3333-333333333333",
+                    assigned_officer_id="b3333333-3333-3333-3333-333333333333",
                     ai_summary="Streetlights non-functional on 5th Cross Road for 2 weeks.",
                     ai_recommendation="Inspect localized feeder pillar, test circuit breakers/transformers, replace faulty luminaires/LEDs, and secure live cables.",
                     ai_confidence=0.96,
@@ -144,8 +144,8 @@ def seed_initial_data_if_empty():
                     created_at=now - timedelta(days=3)
                 ),
                 Grievance(
-                    id="g4444444-4444-4444-4444-444444444444",
-                    citizen_id="u6666666-6666-6666-6666-666666666666",
+                    id="c4444444-4444-4444-4444-444444444444",
+                    citizen_id="a6666666-6666-6666-6666-666666666666",
                     title="Overflowing community garbage dump near primary school",
                     description="Commercial waste and plastic have piled up outside the bin for 4 days creating foul smell and stray dog menace right beside the primary school gate.",
                     category="Sanitation/Waste",
@@ -157,7 +157,7 @@ def seed_initial_data_if_empty():
                     sentiment_score=-0.72,
                     department_id="d4444444-4444-4444-4444-444444444444",
                     ai_department_id="d4444444-4444-4444-4444-444444444444",
-                    assigned_officer_id="o4444444-4444-4444-4444-444444444444",
+                    assigned_officer_id="b4444444-4444-4444-4444-444444444444",
                     ai_summary="Overflowing community garbage dump near primary school gate.",
                     ai_recommendation="Deploy automated hydraulic compactor truck to clear waste accumulation, sanitize surrounding ground, and apply disinfectant powder.",
                     ai_confidence=0.98,
@@ -177,16 +177,16 @@ def seed_initial_data_if_empty():
 
             # 5. Status histories
             histories = [
-                GrievanceStatusHistory(id="h1111111-1111-1111-1111-111111111111", grievance_id="g1111111-1111-1111-1111-111111111111", previous_status=None, new_status="Submitted", changed_by="u6666666-6666-6666-6666-666666666666", remarks="Grievance submitted via portal with AI auto-triage.", created_at=now - timedelta(hours=2)),
-                GrievanceStatusHistory(id="h2222222-2222-2222-2222-222222222222", grievance_id="g2222222-2222-2222-2222-222222222222", previous_status=None, new_status="Submitted", changed_by="u6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=1)),
-                GrievanceStatusHistory(id="h2222222-2222-2222-2222-222222222223", grievance_id="g2222222-2222-2222-2222-222222222222", previous_status="Submitted", new_status="Assigned", changed_by="u1111111-1111-1111-1111-111111111111", remarks="Assigned to Public Works officer Sarah Lin.", created_at=now - timedelta(hours=20)),
-                GrievanceStatusHistory(id="h3333333-3333-3333-3333-333333333331", grievance_id="g3333333-3333-3333-3333-333333333333", previous_status=None, new_status="Submitted", changed_by="u6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=3)),
-                GrievanceStatusHistory(id="h3333333-3333-3333-3333-333333333332", grievance_id="g3333333-3333-3333-3333-333333333333", previous_status="Submitted", new_status="Assigned", changed_by="u1111111-1111-1111-1111-111111111111", remarks="Assigned to Electricity Officer David Kim.", created_at=now - timedelta(days=2)),
-                GrievanceStatusHistory(id="h3333333-3333-3333-3333-333333333333", grievance_id="g3333333-3333-3333-3333-333333333333", previous_status="Assigned", new_status="In Progress", changed_by="u4444444-4444-4444-4444-444444444444", remarks="Field inspection conducted; replacement luminaires dispatched.", created_at=now - timedelta(days=1)),
-                GrievanceStatusHistory(id="h4444444-4444-4444-4444-444444444441", grievance_id="g4444444-4444-4444-4444-444444444444", previous_status=None, new_status="Submitted", changed_by="u6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=5)),
-                GrievanceStatusHistory(id="h4444444-4444-4444-4444-444444444442", grievance_id="g4444444-4444-4444-4444-444444444444", previous_status="Submitted", new_status="Assigned", changed_by="u1111111-1111-1111-1111-111111111111", remarks="Assigned to Sanitation Officer Elena Gomez.", created_at=now - timedelta(days=4)),
-                GrievanceStatusHistory(id="h4444444-4444-4444-4444-444444444443", grievance_id="g4444444-4444-4444-4444-444444444444", previous_status="Assigned", new_status="In Progress", changed_by="u5555555-5555-5555-5555-555555555555", remarks="Compactor truck en route.", created_at=now - timedelta(days=3)),
-                GrievanceStatusHistory(id="h4444444-4444-4444-4444-444444444444", grievance_id="g4444444-4444-4444-4444-444444444444", previous_status="In Progress", new_status="Resolved", changed_by="u5555555-5555-5555-5555-555555555555", remarks="Waste cleared completely and site disinfected with lime powder.", created_at=now - timedelta(days=2)),
+                GrievanceStatusHistory(id="e1111111-1111-1111-1111-111111111111", grievance_id="c1111111-1111-1111-1111-111111111111", previous_status=None, new_status="Submitted", changed_by="a6666666-6666-6666-6666-666666666666", remarks="Grievance submitted via portal with AI auto-triage.", created_at=now - timedelta(hours=2)),
+                GrievanceStatusHistory(id="e2222222-2222-2222-2222-222222222222", grievance_id="c2222222-2222-2222-2222-222222222222", previous_status=None, new_status="Submitted", changed_by="a6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=1)),
+                GrievanceStatusHistory(id="e2222222-2222-2222-2222-222222222223", grievance_id="c2222222-2222-2222-2222-222222222222", previous_status="Submitted", new_status="Assigned", changed_by="a1111111-1111-1111-1111-111111111111", remarks="Assigned to Public Works officer Sarah Lin.", created_at=now - timedelta(hours=20)),
+                GrievanceStatusHistory(id="e3333333-3333-3333-3333-333333333331", grievance_id="c3333333-3333-3333-3333-333333333333", previous_status=None, new_status="Submitted", changed_by="a6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=3)),
+                GrievanceStatusHistory(id="e3333333-3333-3333-3333-333333333332", grievance_id="c3333333-3333-3333-3333-333333333333", previous_status="Submitted", new_status="Assigned", changed_by="a1111111-1111-1111-1111-111111111111", remarks="Assigned to Electricity Officer David Kim.", created_at=now - timedelta(days=2)),
+                GrievanceStatusHistory(id="e3333333-3333-3333-3333-333333333333", grievance_id="c3333333-3333-3333-3333-333333333333", previous_status="Assigned", new_status="In Progress", changed_by="a4444444-4444-4444-4444-444444444444", remarks="Field inspection conducted; replacement luminaires dispatched.", created_at=now - timedelta(days=1)),
+                GrievanceStatusHistory(id="e4444444-4444-4444-4444-444444444441", grievance_id="c4444444-4444-4444-4444-444444444444", previous_status=None, new_status="Submitted", changed_by="a6666666-6666-6666-6666-666666666666", remarks="Grievance submitted.", created_at=now - timedelta(days=5)),
+                GrievanceStatusHistory(id="e4444444-4444-4444-4444-444444444442", grievance_id="c4444444-4444-4444-4444-444444444444", previous_status="Submitted", new_status="Assigned", changed_by="a1111111-1111-1111-1111-111111111111", remarks="Assigned to Sanitation Officer Elena Gomez.", created_at=now - timedelta(days=4)),
+                GrievanceStatusHistory(id="e4444444-4444-4444-4444-444444444443", grievance_id="c4444444-4444-4444-4444-444444444444", previous_status="Assigned", new_status="In Progress", changed_by="a5555555-5555-5555-5555-555555555555", remarks="Compactor truck en route.", created_at=now - timedelta(days=3)),
+                GrievanceStatusHistory(id="e4444444-4444-4444-4444-444444444444", grievance_id="c4444444-4444-4444-4444-444444444444", previous_status="In Progress", new_status="Resolved", changed_by="a5555555-5555-5555-5555-555555555555", remarks="Waste cleared completely and site disinfected with lime powder.", created_at=now - timedelta(days=2)),
             ]
             for h in histories:
                 db.add(h)
@@ -195,8 +195,8 @@ def seed_initial_data_if_empty():
             # 6. Resolution Evidence & Feedback
             evidence = ResolutionEvidence(
                 id="e4444444-4444-4444-4444-444444444444",
-                grievance_id="g4444444-4444-4444-4444-444444444444",
-                officer_id="u5555555-5555-5555-5555-555555555555",
+                grievance_id="c4444444-4444-4444-4444-444444444444",
+                officer_id="a5555555-5555-5555-5555-555555555555",
                 file_url="/uploads/evidence/school_sanitation_resolved.jpg",
                 file_name="school_sanitation_resolved.jpg",
                 remarks="All accumulated solid waste lifted via hydraulic compactor truck. Performed chemical disinfection around school perimeter.",
@@ -206,8 +206,8 @@ def seed_initial_data_if_empty():
 
             feedback = Feedback(
                 id="f4444444-4444-4444-4444-444444444444",
-                grievance_id="g4444444-4444-4444-4444-444444444444",
-                citizen_id="u6666666-6666-6666-6666-666666666666",
+                grievance_id="c4444444-4444-4444-4444-444444444444",
+                citizen_id="a6666666-6666-6666-6666-666666666666",
                 rating=5,
                 comment="Fast response! The area was cleared within 24 hours of assigning. Very grateful.",
                 created_at=now - timedelta(days=1)
@@ -216,9 +216,9 @@ def seed_initial_data_if_empty():
 
             # 7. Initial notifications
             notifs = [
-                Notification(id="n1111111-1111-1111-1111-111111111111", user_id="u6666666-6666-6666-6666-666666666666", title="Grievance Submitted", message='Your grievance "Main water supply pipeline leaking heavily" was submitted.', link="/citizen/grievances/g1111111-1111-1111-1111-111111111111", is_read=True, created_at=now - timedelta(hours=2)),
-                Notification(id="n2222222-2222-2222-2222-222222222222", user_id="u6666666-6666-6666-6666-666666666666", title="Grievance Assigned", message='Your grievance regarding pothole on Grand Trunk Road has been assigned to Public Works.', link="/citizen/grievances/g2222222-2222-2222-2222-222222222222", is_read=False, created_at=now - timedelta(hours=20)),
-                Notification(id="n3333333-3333-3333-3333-333333333333", user_id="u6666666-6666-6666-6666-666666666666", title="Grievance Resolved!", message='Your complaint regarding waste near primary school has been marked Resolved. Please rate the service.', link="/citizen/grievances/g4444444-4444-4444-4444-444444444444", is_read=True, created_at=now - timedelta(days=2)),
+                Notification(id="f1111111-1111-1111-1111-111111111111", user_id="a6666666-6666-6666-6666-666666666666", title="Grievance Submitted", message='Your grievance "Main water supply pipeline leaking heavily" was submitted.', link="/citizen/grievances/c1111111-1111-1111-1111-111111111111", is_read=True, created_at=now - timedelta(hours=2)),
+                Notification(id="f2222222-2222-2222-2222-222222222222", user_id="a6666666-6666-6666-6666-666666666666", title="Grievance Assigned", message='Your grievance regarding pothole on Grand Trunk Road has been assigned to Public Works.', link="/citizen/grievances/c2222222-2222-2222-2222-222222222222", is_read=False, created_at=now - timedelta(hours=20)),
+                Notification(id="f3333333-3333-3333-3333-333333333333", user_id="a6666666-6666-6666-6666-666666666666", title="Grievance Resolved!", message='Your complaint regarding waste near primary school has been marked Resolved. Please rate the service.', link="/citizen/grievances/c4444444-4444-4444-4444-444444444444", is_read=True, created_at=now - timedelta(days=2)),
             ]
             for n in notifs:
                 db.add(n)

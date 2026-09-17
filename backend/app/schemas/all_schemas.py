@@ -1,6 +1,11 @@
 from datetime import datetime
-from typing import Optional, List, Any
+from uuid import UUID
+from typing import Optional, List, Any, Union
 from pydantic import BaseModel, EmailStr, Field
+
+
+# Helper type that accepts either string or UUID from SQLAlchemy
+UID = Union[str, UUID]
 
 
 # ==========================================
@@ -20,7 +25,7 @@ class UserCreate(BaseModel):
     password: str = Field(..., min_length=6, max_length=100)
     role: str = Field(default="citizen", pattern="^(citizen|admin|officer)$")
     phone: Optional[str] = None
-    department_id: Optional[str] = None  # If registering an officer
+    department_id: Optional[UID] = None  # If registering an officer
     designation: Optional[str] = None
 
 
@@ -30,7 +35,7 @@ class UserLogin(BaseModel):
 
 
 class UserOut(BaseModel):
-    id: str
+    id: UID
     name: str
     email: str
     role: str
@@ -64,7 +69,7 @@ class DepartmentCreate(DepartmentBase):
 
 
 class DepartmentOut(DepartmentBase):
-    id: str
+    id: UID
     created_at: datetime
 
     class Config:
@@ -72,9 +77,9 @@ class DepartmentOut(DepartmentBase):
 
 
 class OfficerOut(BaseModel):
-    id: str
-    user_id: str
-    department_id: str
+    id: UID
+    user_id: UID
+    department_id: UID
     badge_number: Optional[str] = None
     designation: Optional[str] = None
     is_available: bool
@@ -104,7 +109,7 @@ class AIAnalysisResult(BaseModel):
     priority_reason: str
     sentiment: str
     sentiment_score: float
-    recommended_department_id: Optional[str] = None
+    recommended_department_id: Optional[UID] = None
     recommended_department_name: Optional[str] = None
     summary: str
     recommended_action: str
@@ -117,11 +122,11 @@ class DuplicateCheckRequest(BaseModel):
     category: Optional[str] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
-    exclude_id: Optional[str] = None
+    exclude_id: Optional[UID] = None
 
 
 class DuplicateMatch(BaseModel):
-    grievance_id: str
+    grievance_id: UID
     title: str
     category: str
     status: str
@@ -134,7 +139,7 @@ class DuplicateMatch(BaseModel):
 # ATTACHMENT & EVIDENCE SCHEMAS
 # ==========================================
 class AttachmentOut(BaseModel):
-    id: str
+    id: UID
     file_url: str
     file_name: str
     file_type: Optional[str] = None
@@ -152,9 +157,9 @@ class ResolutionEvidenceCreate(BaseModel):
 
 
 class ResolutionEvidenceOut(BaseModel):
-    id: str
-    grievance_id: str
-    officer_id: str
+    id: UID
+    grievance_id: UID
+    officer_id: UID
     file_url: str
     file_name: Optional[str] = None
     remarks: str
@@ -169,10 +174,10 @@ class ResolutionEvidenceOut(BaseModel):
 # STATUS HISTORY & FEEDBACK SCHEMAS
 # ==========================================
 class StatusHistoryOut(BaseModel):
-    id: str
+    id: UID
     previous_status: Optional[str] = None
     new_status: str
-    changed_by: Optional[str] = None
+    changed_by: Optional[UID] = None
     remarks: Optional[str] = None
     created_at: datetime
     user: Optional[UserOut] = None
@@ -187,9 +192,9 @@ class FeedbackCreate(BaseModel):
 
 
 class FeedbackOut(BaseModel):
-    id: str
-    grievance_id: str
-    citizen_id: str
+    id: UID
+    grievance_id: UID
+    citizen_id: UID
     rating: int
     comment: Optional[str] = None
     created_at: datetime
@@ -212,15 +217,15 @@ class GrievanceCreate(BaseModel):
 
 
 class GrievanceAssignRequest(BaseModel):
-    department_id: str
-    officer_id: Optional[str] = None
+    department_id: UID
+    officer_id: Optional[UID] = None
     remarks: Optional[str] = "Assigned by administration."
 
 
 class GrievanceOverrideRequest(BaseModel):
     category: Optional[str] = None
     priority: Optional[str] = None
-    department_id: Optional[str] = None
+    department_id: Optional[UID] = None
     remarks: Optional[str] = "Classification updated by administration."
 
 
@@ -230,8 +235,8 @@ class GrievanceStatusUpdateRequest(BaseModel):
 
 
 class DuplicateLinkOut(BaseModel):
-    id: str
-    duplicate_of_grievance_id: str
+    id: UID
+    duplicate_of_grievance_id: UID
     similarity_score: float
     distance_meters: Optional[float] = None
     status: str
@@ -243,8 +248,8 @@ class DuplicateLinkOut(BaseModel):
 
 
 class GrievanceOut(BaseModel):
-    id: str
-    citizen_id: str
+    id: UID
+    citizen_id: UID
     title: str
     description: str
     category: str
@@ -254,9 +259,9 @@ class GrievanceOut(BaseModel):
     priority_reason: Optional[str] = None
     sentiment: Optional[str] = None
     sentiment_score: Optional[float] = None
-    department_id: Optional[str] = None
-    ai_department_id: Optional[str] = None
-    assigned_officer_id: Optional[str] = None
+    department_id: Optional[UID] = None
+    ai_department_id: Optional[UID] = None
+    assigned_officer_id: Optional[UID] = None
     ai_summary: Optional[str] = None
     ai_recommendation: Optional[str] = None
     ai_confidence: Optional[float] = None
@@ -266,7 +271,7 @@ class GrievanceOut(BaseModel):
     longitude: Optional[float] = None
     address: Optional[str] = None
     is_duplicate: bool = False
-    duplicate_of_id: Optional[str] = None
+    duplicate_of_id: Optional[UID] = None
     created_at: datetime
     updated_at: datetime
     
@@ -291,8 +296,8 @@ class GrievanceDetailOut(GrievanceOut):
 # NOTIFICATION SCHEMAS
 # ==========================================
 class NotificationOut(BaseModel):
-    id: str
-    user_id: str
+    id: UID
+    user_id: UID
     title: str
     message: str
     link: Optional[str] = None
@@ -329,7 +334,7 @@ class AnalyticsTrendPoint(BaseModel):
 
 
 class HeatmapPoint(BaseModel):
-    id: str
+    id: UID
     title: str
     category: str
     priority: str
