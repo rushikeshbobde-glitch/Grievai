@@ -1,6 +1,7 @@
 import os
 from typing import List
 from pydantic_settings import BaseSettings
+from pydantic import field_validator
 
 
 class Settings(BaseSettings):
@@ -14,12 +15,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # Database (Supabase / Postgres / SQLite local fallback)
-    DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./grievai.db")
+    DATABASE_URL: str = "sqlite:///./grievai.db"
     
     # Supabase credentials (optional if using direct database or local engine)
-    SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
-    SUPABASE_ANON_KEY: str = os.getenv("SUPABASE_ANON_KEY", "")
-    SUPABASE_SERVICE_ROLE_KEY: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
+    SUPABASE_URL: str = ""
+    SUPABASE_ANON_KEY: str = ""
+    SUPABASE_SERVICE_ROLE_KEY: str = ""
     
     # Storage
     UPLOAD_DIR: str = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "uploads"))
@@ -35,13 +36,24 @@ class Settings(BaseSettings):
         "*"
     ]
 
+    @field_validator("DATABASE_URL", "SUPABASE_URL", "SUPABASE_ANON_KEY", "JWT_SECRET", mode="before")
+    @classmethod
+    def strip_whitespace(cls, v):
+        if isinstance(v, str):
+            v = v.strip().strip("'\"").strip()
+            if v.startswith("postgres://"):
+                v = v.replace("postgres://", "postgresql://", 1)
+        return v
+
     class Config:
         case_sensitive = True
         env_file = ".env"
+        extra = "allow"
 
 
 settings = Settings()
 
 # Ensure uploads directory exists
-os.makedirs(os.path.join(settings.UPLOAD_DIR, "attachments"), exist_ok=True)
+os.makedirs(settings.UPLOAD_DIR, exist_ok=True)
+os.makedirs(os.path.join(settings.UPLOAD_DIR, "grievances"), exist_ok=True)
 os.makedirs(os.path.join(settings.UPLOAD_DIR, "evidence"), exist_ok=True)
